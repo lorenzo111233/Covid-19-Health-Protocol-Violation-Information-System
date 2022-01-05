@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+    <link rel="stylesheet" href="../static/css/style5.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../static/css/style2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="sidebar" >
+    <div class="logo-details">
+      <div class="logo_name"><img src="../static/img/systemlogo1.png" height="80px" style=" margin-top: 50px;"></div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <br>
+    <ul class="nav-list">
+      <li>
+        <a href="{{ url_for('municipal_dashboard') }}">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name" >Dashboard</span>
+        </a>
+         <span class="tooltip" >Dashboard</span>
+      </li>
+      <li>
+       <a href="{{ url_for('municipal') }}">
+         <i class='bx bx-book' ></i>
+         <span class="links_name">Manage Violators</span>
+       </a>
+       <span class="tooltip">Manage Violators</span>
+     </li>
+      <li>
+       <a href="{{ url_for('municipal_service') }}">
+         <i class='bx bx-user' ></i>
+         <span class="links_name">Community Service</span>
+       </a>
+       <span class="tooltip">Community Service</span>
+     </li>
+     <li>
+       <a href="{{ url_for('municipal_chart') }}">
+         <i class='bx bx-chart' ></i>
+         <span class="links_name">Reports</span>
+       </a>
+       <span class="tooltip">Reports</span>
+     </li>
+     <li>
+       <a href="{{ url_for('municipal_logs') }}">
+         <i class='bx bx-folder' ></i>
+         <span class="links_name">Logs</span>
+       </a>
+       <span class="tooltip">Logs</span>
+     </li>
+     <li>
+       <a href="{{ url_for('municipal_archive') }}">
+         <i class='bx bx-archive' ></i>
+         <span class="links_name">Archive</span>
+       </a>
+       <span class="tooltip">Archive</span>
+     </li>
+     <li>
+       <a href="{{ url_for('municipal_guidelines') }}">
+         <i class='bx bx-help-circle' ></i>
+         <span class="links_name">Guidelines</span>
+       </a>
+       <span class="tooltip">Guidelines</span>
+     </li>
+     <li>
+       <a href="{{ url_for('more_settings') }}">
+         <i class='bx bx-edit' ></i>
+         <span class="links_name">Add Violation/Penalty</span>
+       </a>
+       <span class="tooltip">Add Violation/Penalty</span>
+     </li>
+     <li>
+       <a href="{{ url_for('login') }}">
+         <i class='bx bx-exit' ></i>
+         <span class="links_name">Logout</span>
+       </a>
+       <span class="tooltip">Logout</span>
+     </li>
+     
+    </ul>
+  </div>
+  <section class="home-section">
+   <input style="margin-top: 40px;" type="button" class="btn btn-xs btn-primary" value="Print Table" onclick="printData()" />
+<p style="background: #11101D; font-size: 20px; color: white;"> <label style="margin-left: 20px;">Graphical Reports</label><label style="float: right; margin-right: 20px;"></label> </p>
+      </br><br><br>
+<div class="col-xs-10 col-sm-6 col-md-6" style="height: 300px; width: 550px; margin-bottom: -450px; margin-left: 10px; border: solid 3px; background: white; border-radius: 20px; margin-top: -50px;">
+    <div class="">
+        <div class="card-body">
+            <div class="chart-container" style="position: relative;">
+                <canvas id="income_vs_expense" style="height: 500px;"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-10 col-sm-6 col-md-6" style="height: 0; width: 0;">
+    <div class="">
+        <div class="card-body">
+            <div class="chart-container" style="position: relative;">
+                <canvas id="income_vs_category"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-10 col-sm-6 col-md-6" style="height: 300px; width: 550px; margin-left: 10px; margin-bottom: 50px; border: solid 3px; background: white; border-radius: 20px; margin-top: 480px;">
+    <div class="card card-style mb-2">
+        <div class="card-body">
+            <div class="chart-container" style="position: relative;">
+                <canvas id="overtime_expenditure"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<center>
+<table class="content-table" id="example" style="float: right; margin-top: -670px; width: 670px; margin-right: 20px; font-size: 20px; margin-top: ;">
+  <thead>
+    <tr>    
+      <th style="color: black; padding: 10px; font-size: 16px;">Summary Reports</th>
+      <th></th>
+    </tr>
+    <tr>
+      <th >Barangay</th>
+      <th><center>Number of Violators</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Brgy. Banca Banca</td>
+      {%for aa in aa%}
+    <td> <center>{{ aa[0] }}</td>
+        {%endfor%}
+    </tr>
+    <tr>
+       <td>Brgy. Daniw</td>
+    {%for bb in bb%}
+    <td><center> {{ bb[0] }}</td>
+        {%endfor%}
+    </tr>
+    <tr>
+      <td>Brgy. Masapang</td>
+    {%for cc in cc%}
+    <td><center> {{ cc[0] }}</td>
+        {%endfor%}
+    </tr>
+
+    <tr>
+      <td>Brgy. Nanhaya</td>
+    {%for dd in dd%}
+    <td><center> {{ dd[0] }}</td>
+        {%endfor%}
+    </tr>
+
+    <tr>
+    <td>Brgy. Pagalangan</td>
+   {%for ee in ee%}
+    <td><center> {{ ee[0] }}</td>
+        {%endfor%}
+  </tr>
+
+  <tr>
+    <td>Brgy. San Benito</td>
+    {%for ff in ff%}
+    <td><center> {{ ff[0] }}</td>
+        {%endfor%}
+  </tr>
+
+  <tr>
+    <td>Brgy. San Felix</td>
+    {%for gg in gg%}
+    <td><center> {{ gg[0] }}</td>
+        {%endfor%}
+  </tr>
+
+  <tr>
+    <td>Brgy. San Francisco</td>
+   {%for hh in hh%}
+    <td><center> {{ hh[0] }}</td>
+        {%endfor%}
+  </tr>
+
+  <tr>
+    <td>Brgy. San Roque</td>
+    {%for ii in ii%}
+    <td><center> {{ ii[0] }}</td>
+        {%endfor%}
+  </tr>
+  <tr>
+    <td><b>Total</b></td>
+     
+   {%for municipal_db in municipal_db%}
+    <td><center><b> {{ municipal_db[0] }}</td>
+        {%endfor%}
+     </td>
+     
+  </tr>
+  </tbody>
+</table>
+
+
+       
+   
+<script>
+    function printData()
+{
+   var divToPrint=document.getElementById("example");
+   newWin= window.open("");
+   newWin.document.write(divToPrint.outerHTML);
+   newWin.print();
+   newWin.close();
+}
+</script>
+
+<script>
+    let income_vs_expense_data = JSON.parse({{ income_vs_expense | tojson }})
+    let income_category_data = JSON.parse({{ income_category | tojson}})
+
+    Chart.scaleService.updateScaleDefaults('linear', {
+            ticks: {
+                min: 0
+            }
+    });
+
+
+    let income_vs_expense_chart = new Chart(income_vs_expense, {
+            type: 'pie',
+            data: {
+            labels: ['Cash', 'Community Service'],
+                datasets: [{
+                    label: "Total Penalty",
+                    data: income_vs_expense_data,
+                    backgroundColor: ['#5DA5DA ', '#FAA43A', '#60BD68',
+                        '#B276B2', '#E16851', '#FB8267'],
+
+                    borderWidth: 1,
+                    hoverBorderColor: "black",
+                    hoverBorderWidth: 2,
+                    hoverBackgroundColor: 'rgba(154, 245, 140)',
+                    pointHoverRadius: 5
+                }],
+            },
+            options: {
+                    title: {
+                        display: true,
+                            text: "Penalty",
+                                fontSize: 20,
+                    },
+                    legend: {
+                        position: "right",
+                            labels: {
+                            fontColor: "gray"
+                        },
+                        display: true,
+                    },
+
+                    elements: {
+                        hitRadius: 3,
+                    }
+            }
+        })
+
+    let income_vs_category_chart = new Chart(income_vs_category, {
+            type: 'bar',
+            data: {
+                labels: ['No Face Mask', 'No Face Shield', 'No Social Distancing', 'Curfew'],
+                datasets: [{
+                    label: "Penalty Summary",
+                    data: income_category_data,
+            backgroundColor: ['#5DA5DA ', '#FAA43A', '#60BD68',
+                '#B276B2', '#E16851', '#FB8267'],
+            borderWidth: 1,
+            hoverBorderColor: "black",
+            hoverBorderWidth: 2,
+            hoverBackgroundColor: 'rgba(154, 245, 140)',
+            pointHoverRadius: 5
+        }],
+            },
+        options: {
+                title: {
+                    display: true,
+                        text: "Penalty Summary",
+                            fontSize: 20,
+            },
+                legend: {
+                    position: "right",
+                        labels: {
+                        fontColor: "gray"
+                    },
+                    display: true,
+            },
+
+                elements: {
+                    hitRadius: 3,
+            }
+            }
+        })
+        over_time_expenditure = JSON.parse({{over_time_expenditure | tojson}})
+        labels = JSON.parse({{ dates_label  | tojson}})
+
+        new Chart(document.getElementById("overtime_expenditure"), {
+                type: "line",
+                data:
+                {
+                    labels: labels,
+                    datasets: [{
+                        label: "Violators Per Day",
+                        
+                        data: over_time_expenditure,
+                        fill: false,
+                        borderColor: "rgb(75, 192, 192)",
+                        lineTension: 0.1
+                    }]
+                },
+                options: {}
+            });
+</script>
+  </section>
+  <script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+    sidebar.classList.toggle("open");
+    menuBtnChange(); //calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+   }else {
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+   }
+  }
+  </script>
+</body>
+</html>

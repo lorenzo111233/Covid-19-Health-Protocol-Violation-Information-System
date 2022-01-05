@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="css/style5.css") }}">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="css/style2.css") }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   </head>
+<body>
+   <div class="sidebar" style="z-index: 1;">
+    <div class="logo-details">
+      <div class="logo_name"><img src="../static/img/systemlogo1.png" height="80px" style=" margin-top: 50px;"></div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <br>
+    <ul class="nav-list">
+      <li>
+        <a href="{{ url_for('accounting_dashboard') }}">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name" >Dashboard</span>
+        </a>
+         <span class="tooltip" >Dashboard</span>
+      </li>
+      <li>
+       <a href="{{ url_for('accounting') }}">
+         <i class='bx bx-book' ></i>
+         <span class="links_name">Accounting</span>
+       </a>
+       <span class="tooltip">Accounting</span>
+     </li>
+      <li>
+       <a href="{{ url_for('accounting_transaction') }}">
+         <i class='bx bx-user' ></i>
+         <span class="links_name">Complete Transaction</span>
+       </a>
+       <span class="tooltip">Complete Transaction</span>
+     </li>
+     <li>
+       <a href="{{ url_for('accounting_reports') }}">
+         <i class='bx bx-chart' ></i>
+         <span class="links_name">Reports</span>
+       </a>
+       <span class="tooltip">Reports</span>
+     </li>
+     <li>
+       <a href="{{ url_for('accounting_logs') }}">
+         <i class='bx bx-folder' ></i>
+         <span class="links_name">Logs</span>
+       </a>
+       <span class="tooltip">Logs</span>
+     </li>
+     <li>
+       <a href="{{ url_for('login') }}">
+         <i class='bx bx-exit' ></i>
+         <span class="links_name">Logout</span>
+       </a>
+       <span class="tooltip">Logout</span>
+     </li>
+     
+    </ul>
+  </div>
+  {% block modal %}{% endblock %}
+<body style="background-color: #dddddd;">
+<section class="home-section">
+    <p style="background: #11101D; font-size: 20px; color: white;"> <label style="margin-left: 20px; margin-top: 10px;">Accounting Section</label><label style="float: right; margin-right: 20px;"></label> 
+{% block content %}
+<div class="main" style="margin-left: 1px; margin-top: -20px;">
+      {% for message in get_flashed_messages() %}
+      <br>
+            <div class="alert alert-success" style="margin-left: 20px; color: black;"><center>{{ message }}</center></div>
+      {% endfor %}<br>
+  
+  <table class="content-table" id="example"  style="width: calc(100% - -30px); margin-left: -4px; font-size: 13px;">
+  <thead style="background-color: ;">
+  <tr >
+    <th>Last Name</th>
+    <th>First Name</th>
+    <th>Middle Name</th>
+    <th>House No.</th>
+    <th>Street</th>
+    <th>Barangay</th>
+    <th>Contact #</th>
+    <th>Violation</th>
+    <th>Penalty</th>
+    <th>Total Penalty</th>
+    <th>Date</th>
+    <th>Status</th>
+    <th width="130px">Action</th>
+    
+  </tr>
+  </thead>
+  {%for bb in accounting%}
+  <tr>
+  <td>{{bb['last_name']}}</td>
+  <td>{{bb['first_name']}}</td>
+  <td>{{bb['middle_name']}}</td>
+  <td>{{bb['house_number']}}</td>
+  <td>{{bb['street']}}</td>
+    <td>{{bb['barangay']}}</td>
+    <td>{{bb['contact']}}</td>
+    <td>{{bb['violation']}}</td>
+    <td>{{bb['penalty']}}</td>
+    <td>{{bb['total_penalty']}}</td>
+    <td>{{bb.date}}</td>
+    <td>{{bb['status']}}</td>
+    <td>
+        <a href="{{url_for('edit', table="accvl", id=bb['id'])}}" class="btn btn-xs btn-success" title="Click to Edit" style="font-size: 15px;">Pay</a>
+        <a href="{{url_for('sendsms', table="sms", contact=bb['contact'], last_name=bb['last_name'])}}" class="btn btn-xs btn-warning" title="Click to Send Message" style="margin-bottom: 5px; background: #f9a825;"><i class="fa fa-envelope" aria-hidden="true" style="font-size: 16px; color: white;"></i></a>
+      </center>
+    </td>
+
+  </tr> 
+
+  {%endfor%}
+
+          
+
+
+</section>
+
+<script src="../static/js/script1.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+<script>
+
+  $(document).ready(function() {
+  $('#example').DataTable({lengthMenu: [[5, 10, 20, -1], [5, 10, 20,"All"]]});
+} );
+</script>
+
+
+<script>
+    function onlyNumberKey(evt) {
+          
+        // Only ASCII character in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
+    }
+</script>
+{% endblock %}
+
+{% block script %}{% endblock %}

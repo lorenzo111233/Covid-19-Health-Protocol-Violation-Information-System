@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Animated Login Form</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+	<style>
+	.img img{
+		margin-top: 120px;
+	}
+	.login-content{
+		margin-top: 100px;
+		margin-left: 100px;
+	}
+		
+	.ssss{
+	display: block;
+	width: 50%;
+	height: 50px;
+	border-radius: 25px;
+	outline: none;
+	border: none;
+	background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+	background-size: 200%;
+	font-size: 1.2rem;
+	color: #fff;
+	font-family: 'Poppins', sans-serif;
+	text-transform: uppercase;
+	margin: 1rem 0;
+	cursor: pointer;
+	transition: .5s;
+	}
+	.sss{
+	width: 50%;
+	height: 50px;
+	border-radius: 25px;
+	outline: none;
+	border: none;
+	background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+	background-size: 200%;
+	font-size: 1.2rem;
+	color: #fff;
+	font-family: 'Poppins', sans-serif;
+	text-transform: uppercase;
+	margin: 1rem 0;
+	cursor: pointer;
+	transition: .5s;
+	text-align: center;
+	padding-top: 12px;
+	float: left;
+	margin-top: -65px;
+	margin-left: 200px;
+	}
+	.btn:hover{
+	background-position: right;
+	}
+	.fp{
+		font-size: 5px;
+	}
+	</style>
+	
+</head>
+<body>
+	<img class="wave" src="../static/img/wave.png">
+
+	<div class="container">
+		<div class="img">
+			<img src="../static/img/victoria.png">
+		</div>
+
+
+
+		<div class="login-content">
+			<form method="POST">
+				<h2 style="font-size: 30px;">Forgot Password</h2>
+         {% for message in get_flashed_messages() %}
+            <div class="alert alert-danger">{{ message }}</div>
+         {% endfor %}<br><br>
+         <div class="input-div one">
+           		   <div class="i">
+           		   		<i class="fas fa-user"></i>
+           		   </div>
+           		   <div class="div">
+           		   		<h5>Email</h5>
+           		   		<input type="email" name="mail" id="mail" class="input" required="required">
+           		   </div>
+           		</div>
+
+           		
+            	 <br>
+    <button  type="submit" class="ssss"><i class="fa fa-check" aria-hidden="true"></i>Submit</button>
+    <a href="{{url_for('login')}}" class="sss"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</a>
+    </form>
+    </div>
+            </form>
+
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../static/js/main.js"></script>
+</body>
+</html>

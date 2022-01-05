@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+    <link rel="stylesheet" href="../static/css/style5.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="css/style2.css") }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="sidebar" >
+    <div class="logo-details">
+        <div class="logo_name"><img src="../static/img/systemlogo1.png" height="80px" style=" margin-top: 50px;"></div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <ul class="nav-list">
+      <li>
+        <a href="{{ url_for('sanfelix_dashboard') }}">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name" >Dashboard</span>
+        </a>
+         <span class="tooltip" >Dashboard</span>
+      </li>
+      <li>
+       <a href="{{ url_for('sanfelix') }}">
+         <i class='bx bx-book' ></i>
+         <span class="links_name">Manage Violators</span>
+       </a>
+       <span class="tooltip">Manage Violators</span>
+     </li>
+      <li>
+       <a href="{{ url_for('sanfelix_service') }}">
+         <i class='bx bx-user' ></i>
+         <span class="links_name">Community Service</span>
+       </a>
+       <span class="tooltip">Community Service</span>
+     </li>
+     <li>
+       <a href="{{ url_for('sanfelix_chart') }}">
+         <i class='bx bx-chart' ></i>
+         <span class="links_name">Reports</span>
+       </a>
+       <span class="tooltip">Reports</span>
+     </li>
+     <li>
+       <a href="{{ url_for('sanfelix_logs') }}">
+         <i class='bx bx-folder' ></i>
+         <span class="links_name">Logs</span>
+       </a>
+       <span class="tooltip">Logs</span>
+     </li>
+     <li>
+       <a href="{{ url_for('sanfelix_archive') }}">
+         <i class='bx bx-archive' ></i>
+         <span class="links_name">Archive</span>
+       </a>
+       <span class="tooltip">Archive</span>
+     </li>
+     <li>
+       <a href="{{ url_for('sanfelix_guidelines') }}">
+         <i class='bx bx-help-circle' ></i>
+         <span class="links_name">Guidelines</span>
+       </a>
+       <span class="tooltip">Guidelines</span>
+     </li>
+     <li>
+       <a href="{{ url_for('login') }}">
+         <i class='bx bx-exit' ></i>
+         <span class="links_name">Logout</span>
+       </a>
+       <span class="tooltip">Logout</span>
+     </li>
+     
+    </ul>
+  </div>
+  <section class="home-section">
+   {% extends 'sanfelix_table.html' %}
+  </section>
+  <script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+    sidebar.classList.toggle("open");
+    menuBtnChange(); //calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+   }else {
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+   }
+  }
+  </script>
+</body>
+</html>

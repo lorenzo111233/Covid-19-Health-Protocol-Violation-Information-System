@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/style5.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="sidebar" >
+    <div class="logo-details">
+        <div class="logo_name"><img src="../static/img/systemlogo1.png" height="80px" style=" margin-top: 50px;"></div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <ul class="nav-list">
+      <li>
+        <a href="{{ url_for('sanfrancisco_dashboard') }}">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name" >Dashboard</span>
+        </a>
+         <span class="tooltip" >Dashboard</span>
+      </li>
+      <li>
+       <a href="{{ url_for('sanfrancisco') }}">
+         <i class='bx bx-book' ></i>
+         <span class="links_name">Manage Violators</span>
+       </a>
+       <span class="tooltip">Manage Violators</span>
+     </li>
+      <li>
+       <a href="{{ url_for('sanfrancisco_service') }}">
+         <i class='bx bx-user' ></i>
+         <span class="links_name">Community Service</span>
+       </a>
+       <span class="tooltip">Community Service</span>
+     </li>
+     <li>
+       <a href="{{ url_for('sanfrancisco_chart') }}">
+         <i class='bx bx-chart' ></i>
+         <span class="links_name">Reports</span>
+       </a>
+       <span class="tooltip">Reports</span>
+     </li>
+     <li>
+       <a href="{{ url_for('sanfrancisco_logs') }}">
+         <i class='bx bx-folder' ></i>
+         <span class="links_name">Logs</span>
+       </a>
+       <span class="tooltip">Logs</span>
+     </li>
+     <li>
+       <a href="{{ url_for('sanfrancisco_archive') }}">
+         <i class='bx bx-archive' ></i>
+         <span class="links_name">Archive</span>
+       </a>
+       <span class="tooltip">Archive</span>
+     </li>
+     <li>
+       <a href="{{ url_for('sanfrancisco_guidelines') }}">
+         <i class='bx bx-help-circle' ></i>
+         <span class="links_name">Guidelines</span>
+       </a>
+       <span class="tooltip">Guidelines</span>
+     </li>
+     <li>
+       <a href="{{ url_for('login') }}">
+         <i class='bx bx-exit' ></i>
+         <span class="links_name">Logout</span>
+       </a>
+       <span class="tooltip">Logout</span>
+     </li>
+     
+    </ul>
+  </div>
+  <section class="home-section">
+   <p style="background: #11101D; font-size: 20px; color: white;"> <label style="margin-left: 20px;">Barangay San Francisco Dashboard </label><label style="float: right; margin-right: 20px;"></label> 
+      </p></br><br>
+
+      <div class="text" style="background: white; box-shadow: 0 4px 8px 0; padding: 20px; border-radius: 20px; width: 600px; margin-top: -10px; color: black;">
+      {%for hi in hi%}
+      <p>Hi, {{ hi['username']}}!<p style="font-size: 16px;">Welcome back to Covid-19 Health Protocol <br> Violators Management Information System <img src="../static/img/hi.png" height="140px;" style="float: right; margin-top: -110px; margin-right: 30px"></p>
+      {%endfor%}
+      </p>
+      </div>
+       <div class="text" style="background: white; box-shadow: 0 4px 8px 0; padding: 20px; border-radius: 20px; width: 270px; margin-top: -10px; color: black; height:;">
+      <p>6,584 <p style="font-size: 16px; color: #009879"> Total Population <img src="../static/img/population.png" height="60px;" style="float: right; margin-top: -35px;"></p> 
+      </p>
+      </div>
+
+       <div class="text" style="background: white; box-shadow: 0 4px 8px 0; padding: 20px; border-radius: 20px; width: 270px; margin-top: -10px; color: black;">
+        {%for sfdb in sfdb%}
+      <p>{{ sfdb[0] }}<p style="font-size: 16px; color:  #009879"> Violators<img src="../static/img/violators.png" height="60px;" style="float: right; margin-top: -35px;"></p>
+      {%endfor%}
+      </p>
+      </div>
+      <br><br>
+
+      <table class="content-table" style="font-weight: ;">
+  <thead>
+    <tr>
+      
+      <th></th>
+      <th style="color: black; padding: 10px; font-size: 20px;">List of Barangay Officials</th>
+      <th></th>
+    </tr>
+    <tr>
+      <th style="width: px;">Number</th>
+      <th >Name</th>
+      <th>Position</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.</td>
+      <td>Leoncio S. Fajardo</td>
+    <td>Punong Barangay</td>
+    </tr>
+    <tr>
+      <td>2.</td>
+       <td>Eliodore D.  De Castro</td>
+    <td>Barangay Secretary</td>
+    </tr>
+    <tr>
+      <td>3.</td>
+      <td>Rebecca S. Balayong</td>
+    <td>Sanguniang Barangay Member</td>
+    </tr>
+
+    <tr>
+      <td>4.</td>
+      <td>Pedro D. Dela Cruz</td>
+    <td>Sanguniang Barangay Member</td>
+    </tr>
+
+    <tr>
+       <td>5.</td>
+    <td>Elpidio R. Aquino</td>
+    <td>Sanguniang Barangay Member</td>
+  </tr>
+
+  <tr>
+     <td>6.</td>
+    <td>Apolinario E. Lait</td>
+    <td>Sanguniang Barangay Member</td>
+  </tr>
+
+  <tr>
+     <td>7.</td>
+    <td>Herson B. Aquino</td>
+    <td>Sanguniang Barangay Member</td>
+  </tr>
+
+  <tr>
+     <td>8.</td>
+    <td>Lamberto P. San Jose</td>
+   <td>Sanguniang Barangay Member</td>
+  </tr>
+
+  <tr>
+     <td>9.</td>
+    <td>Darry Shel M. Estorba</td>
+    <td>SK Chairperson</td>
+  </tr>
+  </tbody>
+</table>
+  </section>
+  <script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+    sidebar.classList.toggle("open");
+    menuBtnChange(); //calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+   }else {
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+   }
+  }
+  </script>
+</body>
+</html>

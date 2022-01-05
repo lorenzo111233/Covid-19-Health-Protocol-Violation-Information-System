@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+    <link rel="stylesheet" href="../static/css/style5.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../static/css/style2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+ <div class="sidebar" >
+    <div class="logo-details">
+      <div class="logo_name"><img src="../static/img/systemlogo1.png" height="80px" style=" margin-top: 50px;"></div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <br>
+    <ul class="nav-list">
+      <li>
+        <a href="{{ url_for('admin_dashboard') }}">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name" >Dashboard</span>
+        </a>
+         <span class="tooltip" >Dashboard</span>
+      </li>
+      <li>
+       <a href="{{ url_for('admin_account') }}">
+         <i class='bx bx-book' ></i>
+         <span class="links_name">Manage Account</span>
+       </a>
+       <span class="tooltip">Manage Account</span>
+     </li>
+      <li>
+       <a href="{{ url_for('admin_logs') }}">
+         <i class='bx bx-folder' ></i>
+         <span class="links_name">Logs</span>
+       </a>
+       <span class="tooltip">Logs</span>
+     </li>
+     <li>
+       <a href="{{ url_for('admin_archive') }}">
+         <i class='bx bx-archive' ></i>
+         <span class="links_name">Archive</span>
+       </a>
+       <span class="tooltip">Archive</span>
+     </li>
+     <li> 
+       <a href="{{ url_for('login') }}">
+         <i class='bx bx-exit' ></i>
+         <span class="links_name">Logout</span>
+       </a>
+       <span class="tooltip">Logout</span>
+     </li>
+     
+    </ul>
+  </div>
+  <section class="home-section">
+   
+<p style="background: #11101D; font-size: 20px; color: white;"> <label style="margin-left: 20px;">Manage Account </label><label style="float: right; margin-right: 20px;"></label> 
+      </p></br><br><br>
+<div class="main" style="margin-left: 1px; margin-top: -90px;">
+      {% for message in get_flashed_messages() %}
+      <br>
+            <div class="alert alert-success" style="margin-left: 20px; color: black;"><center>{{ message }}</center></div>
+      {% endfor %}<br>
+
+  <a href="{{url_for('add', table="mmacc")}}" class="btn btn-lg btn-primary" title="Click to Add" style="float: right; margin-right: 2px; margin-top: -10px;"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Account</a>
+   
+  <br><br>
+ <input style="float: left; margin-top: -50px; margin-left: 15px;" type="button" class="btn btn-xs btn-primary" value="Print Table" onclick="myApp.printTable()" />
+  <table class="content-table" id="example"  style="width: calc(100% - -30px); margin-left: -4px; font-size: 13px;">
+  <thead style="background-color: ;">
+  <tr >
+    <th>Username</th>
+    <th>Password</th>
+    <th>Position</th>
+    <th>Email</th>
+    <th>Category</th>
+    <th>Code</th>
+    <th>Action</th>
+    
+  </tr>
+  </thead>
+  {%for bb in admin_account%}
+  <tr>
+  <td>{{bb['username']}}</td>
+  <td>{{bb['password']}}</td>
+  <td>{{bb['position']}}</td>
+  <td>{{bb['mail']}}</td>
+  <td>{{bb['barangay']}}</td>
+  <td>{{bb['hashCode']}}</td>
+    <td width="150px">
+      <center>
+       <a href="{{url_for('delete_account', table="mmacc" ,username=bb['username'])}}" class="btn btn-xs btn-danger" title="Click to Delete" style="margin-bottom: 5px;"><i class="fa fa-trash" aria-hidden="true" style="font-size: 20px;"></i></a>
+      <a href="{{url_for('edit_account', table="mmacc", username=bb['username'])}}" class="btn btn-xs btn-primary" title="Click to Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+      </center>
+    </td>
+
+  </tr> 
+  {%endfor%}
+  </table>
+  </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+<script>
+  $(document).ready(function() {
+  $('#example').DataTable({lengthMenu: [[5, 10, 20, -1], [5, 10, 20,"All"]]});
+} );
+</script>
+<script>
+    var myApp = new function () {
+        this.printTable = function () {
+            var tab = document.getElementById('example');
+            var win = window.open('', '', 'height=700,width=700');
+            win.document.write(tab.outerHTML);
+            win.document.close();
+            win.print();
+        }
+    }
+</script>
+ <script src="../static/js/script1.js"></script>
+   
+  </section>
+  <script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+    sidebar.classList.toggle("open");
+    menuBtnChange(); //calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+   }else {
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+   }
+  }
+  </script>
+</body>
+</html>

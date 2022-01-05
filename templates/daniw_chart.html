@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+  <head>
+    <style type="text/css">
+        body{
+           ont-family: 'Oswald', sans-serif;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+    <link rel="stylesheet" href="../static/css/style5.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="css/style2.css") }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Oswald:wght@500&display=swap" rel="stylesheet">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+ <div class="sidebar" >
+    <div class="logo-details">
+      <div class="logo_name"><img src="../static/img/systemlogo1.png" height="80px" style=" margin-top: 50px;"></div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <br>
+    <ul class="nav-list">
+      <li>
+        <a href="{{ url_for('daniw_dashboard') }}">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name" >Dashboard</span>
+        </a>
+         <span class="tooltip" >Dashboard</span>
+      </li>
+      <li>
+       <a href="{{ url_for('daniw') }}">
+         <i class='bx bx-book' ></i>
+         <span class="links_name">Manage Violators</span>
+       </a>
+       <span class="tooltip">Manage Violators</span>
+     </li>
+      <li>
+       <a href="{{ url_for('daniw_service') }}">
+         <i class='bx bx-user' ></i>
+         <span class="links_name">Community Service</span>
+       </a>
+       <span class="tooltip">Community Service</span>
+     </li>
+     <li>
+       <a href="{{ url_for('daniw_chart') }}">
+         <i class='bx bx-chart' ></i>
+         <span class="links_name">Reports</span>
+       </a>
+       <span class="tooltip">Reports</span>
+     </li>
+     <li>
+       <a href="{{ url_for('daniw_logs') }}">
+         <i class='bx bx-folder' ></i>
+         <span class="links_name">Logs</span>
+       </a>
+       <span class="tooltip">Logs</span>
+     </li>
+     <li>
+       <a href="{{ url_for('daniw_archive') }}">
+         <i class='bx bx-archive' ></i>
+         <span class="links_name">Archive</span>
+       </a>
+       <span class="tooltip">Archive</span>
+     </li>
+     <li>
+       <a href="{{ url_for('daniw_guidelines') }}">
+         <i class='bx bx-help-circle' ></i>
+         <span class="links_name">Guidelines</span>
+       </a>
+       <span class="tooltip">Guidelines</span>
+     </li>
+     <li>
+       <a href="{{ url_for('login') }}">
+         <i class='bx bx-exit' ></i>
+         <span class="links_name">Logout</span>
+       </a>
+       <span class="tooltip">Logout</span>
+     </li>
+     
+    </ul>
+  </div>
+  <section class="home-section">
+    <p style="background: #11101D; font-size: 20px; color: white;"> <label style="margin-left: 20px;">Reports</label><label style="float: right; margin-right: 20px;"></label></p>
+    <br><br>
+<input style="margin-top: 0px;" type="button" class="btn btn-lg btn-primary" value="Print Table" onclick="printData()" />
+<div class="col-xs-10 col-sm-6 col-md-6" style="height: 300px; width: 550px; margin-bottom: -450px; margin-left: 10px; border: solid 3px; background: white; border-radius: 20px; margin-top: -30px;">
+    <div class="">
+        <div class="card-body">
+            <div class="chart-container" style="position: relative;">
+                <canvas id="income_vs_expense" style="height: 500px;"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-10 col-sm-6 col-md-6" style="height: 0; width: 0;">
+    <div class="">
+        <div class="card-body">
+            <div class="chart-container" style="position: relative;">
+                <canvas id="income_vs_category"></canvas>
+            </div>
+        </div>
+    </div>
+</div><br>
+
+<div class="col-xs-10 col-sm-6 col-md-6" style="height: 300px; width: 550px; margin-bottom: -450px; margin-left: 10px; border: solid 3px; background: white; border-radius: 20px; margin-top: 470px;">
+    <div class="">
+        <div class="card-body">
+            <div class="chart-container" style="position: relative;">
+                <canvas id="overtime_expenditure"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="content-table" id="example" style="float: right; margin-top: -100px; width: 670px; margin-right: 20px; font-size: 20px; margin-top: ;">
+  <thead>
+    <tr>    
+      <th style="color: black; padding: 10px; font-size: 16px;">Summary Reports of Brgy. Daniw</th>
+      <th></th>
+    </tr>
+    <tr>
+      <th >Violations</th>
+      <th><center>Number of Violators</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>No Face Mask</td>
+      {%for aa in aa%}
+    <td> <center>{{ aa[0] }}</td>
+        {%endfor%}
+    </tr>
+    <tr>
+       <td>No Face Shield</td>
+    {%for bb in bb%}
+    <td><center> {{ bb[0] }}</td>
+        {%endfor%}
+    </tr>
+    <tr>
+      <td>No Social Distancing</td>
+    {%for cc in cc%}
+    <td><center> {{ cc[0] }}</td>
+        {%endfor%}
+    </tr>
+
+    <tr>
+      <td>Curfew</td>
+    {%for dd in dd%}
+    <td><center> {{ dd[0] }}</td>
+        {%endfor%}
+    </tr>
+
+  <tr>
+    <td><b>Total</b></td>
+     
+   {%for ee in ee%}
+    <td><center><b> {{ ee[0] }}</td>
+        {%endfor%}
+     </td>
+     
+  </tr>
+  </tbody>
+</table>
+<script>
+    function printData()
+{
+   var divToPrint=document.getElementById("example");
+   newWin= window.open("");
+   newWin.document.write(divToPrint.outerHTML);
+   newWin.print();
+   newWin.close();
+}
+</script>
+<script>
+    let income_vs_expense_data = JSON.parse({{ income_vs_expense | tojson }})
+    let income_category_data = JSON.parse({{ income_category | tojson}})
+
+    Chart.scaleService.updateScaleDefaults('linear', {
+            ticks: {
+                min: 0
+            }
+    });
+
+
+    let income_vs_expense_chart = new Chart(income_vs_expense, {
+            type: 'pie',
+            data: {
+            labels: ['Cash', 'Community Service'],
+                datasets: [{
+                    label: "Total Penalty",
+                    data: income_vs_expense_data,
+                    backgroundColor: ['#5DA5DA ', '#FAA43A', '#60BD68',
+                        '#B276B2', '#E16851', '#FB8267'],
+
+                    borderWidth: 1,
+                    hoverBorderColor: "black",
+                    hoverBorderWidth: 2,
+                    hoverBackgroundColor: 'rgba(154, 245, 140)',
+                    pointHoverRadius: 5
+                }],
+            },
+            options: {
+                    title: {
+                        display: true,
+                            text: "Penalty",
+                                fontSize: 20,
+                    },
+                    legend: {
+                        position: "right",
+                            labels: {
+                            fontColor: "gray"
+                        },
+                        display: true,
+                    },
+
+                    elements: {
+                        hitRadius: 3,
+                    }
+            }
+        })
+
+    let income_vs_category_chart = new Chart(income_vs_category, {
+            type: 'bar',
+            data: {
+                labels: ['No Face Mask', 'No Face Shield', 'No Social Distancing', 'Curfew'],
+                datasets: [{
+                    label: "Penalty Summary",
+                    data: income_category_data,
+            backgroundColor: ['#5DA5DA ', '#FAA43A', '#60BD68',
+                '#B276B2', '#E16851', '#FB8267'],
+            borderWidth: 1,
+            hoverBorderColor: "black",
+            hoverBorderWidth: 2,
+            hoverBackgroundColor: 'rgba(154, 245, 140)',
+            pointHoverRadius: 5
+        }],
+            },
+        options: {
+                title: {
+                    display: true,
+                        text: "Penalty Summary",
+                            fontSize: 20,
+            },
+                legend: {
+                    position: "right",
+                        labels: {
+                        fontColor: "gray"
+                    },
+                    display: true,
+            },
+
+                elements: {
+                    hitRadius: 3,
+            }
+            }
+        })
+        over_time_expenditure = JSON.parse({{over_time_expenditure | tojson}})
+        labels = JSON.parse({{ dates_label  | tojson}})
+
+        new Chart(document.getElementById("overtime_expenditure"), {
+                type: "line",
+                data:
+                {
+                    labels: labels,
+                    datasets: [{
+                        label: "Violators Per Day",
+                        
+                        data: over_time_expenditure,
+                        fill: false,
+                        borderColor: "rgb(75, 192, 192)",
+                        lineTension: 0.1
+                    }]
+                },
+                options: {}
+            });
+</script>
+
+  </section>
+  <script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+    sidebar.classList.toggle("open");
+    menuBtnChange(); //calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+   }else {
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+   }
+  }
+  </script>
+</body>
+</html>

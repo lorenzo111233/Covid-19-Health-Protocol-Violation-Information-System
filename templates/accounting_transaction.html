@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+    <link rel="stylesheet" href="../static/css/style5.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../static/css/style2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+    <div class="sidebar" >
+    <div class="logo-details">
+      <div class="logo_name"><img src="../static/img/systemlogo1.png" height="80px" style=" margin-top: 50px;"></div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <br>
+    <ul class="nav-list">
+      <li>
+        <a href="{{ url_for('accounting_dashboard') }}">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name" >Dashboard</span>
+        </a>
+         <span class="tooltip" >Dashboard</span>
+      </li>
+      <li>
+       <a href="{{ url_for('accounting') }}">
+         <i class='bx bx-book' ></i>
+         <span class="links_name">Accounting</span>
+       </a>
+       <span class="tooltip">Accounting</span>
+     </li>
+      <li>
+       <a href="{{ url_for('accounting_transaction') }}">
+         <i class='bx bx-user' ></i>
+         <span class="links_name">Complete Transaction</span>
+       </a>
+       <span class="tooltip">Complete Transaction</span>
+     </li>
+     <li>
+       <a href="{{ url_for('accounting_reports') }}">
+         <i class='bx bx-chart' ></i>
+         <span class="links_name">Reports</span>
+       </a>
+       <span class="tooltip">Reports</span>
+     </li>
+     <li>
+       <a href="{{ url_for('accounting_logs') }}">
+         <i class='bx bx-folder' ></i>
+         <span class="links_name">Logs</span>
+       </a>
+       <span class="tooltip">Logs</span>
+     </li>
+     <li>
+       <a href="{{ url_for('login') }}">
+         <i class='bx bx-exit' ></i>
+         <span class="links_name">Logout</span>
+       </a>
+       <span class="tooltip">Logout</span>
+     </li>
+     
+    </ul>
+  </div>
+  <section class="home-section">
+  <p style="background: #11101D; font-size: 20px; color: white;"> <label style="margin-left: 20px; margin-top: 10px;">Complete Transaction</label><label style="float: right; margin-right: 20px;"></label> 
+<div class="main" style="margin-left: 1px; margin-top: -20px;">
+      {% for message in get_flashed_messages() %}
+      <br>
+            <div class="alert alert-success" style="margin-left: 20px; color: black;"><center>{{ message }}</center></div>
+      {% endfor %}<br>
+  
+  <table class="content-table" id="example"  style="width: calc(100% - -30px); margin-left: -4px; font-size: 13px;">
+  <thead style="background-color: ;">
+  <tr >
+    <th>Last Name</th>
+    <th>First Name</th>
+    <th>Middle Initial</th>
+    <th>House No.</th>
+    <th>Street</th>
+    <th>Barangay</th>
+    <th>Contact#</th>
+    <th>Violation</th>
+    <th>Penalty</th>
+    <th>Penalty Times</th>
+    <th>Date</th>
+    <th>Status</th>
+    
+  </tr>
+  </thead>
+  {%for bb in accounting%}
+  <tr>
+  <td>{{bb['last_name']}}</td>
+  <td>{{bb['first_name']}}</td>
+  <td>{{bb['middle_name']}}</td>
+  <td>{{bb['house_number']}}</td>
+  <td>{{bb['street']}}</td>
+    <td>{{bb['barangay']}}</td>
+    <td>{{bb['contact']}}</td>
+    <td>{{bb['violation']}}</td>
+    <td>{{bb['penalty']}}</td>
+    <td>{{bb['total_penalty']}}</td>
+    <td>{{bb['date']}}</td>
+    <td>{{bb['status']}}</td>
+    <td>
+      <center>
+
+  </tr> 
+  {%endfor%}
+  </table>
+
+  </section>
+  <script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+    sidebar.classList.toggle("open");
+    menuBtnChange(); //calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+   }else {
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+   }
+  }
+  </script>
+</body>
+</html>

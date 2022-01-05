@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> </title>
+    <link rel="stylesheet" href="../static/css/style5.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+   
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="css/style2.css") }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+</head>
+<body style="background-color: #dddddd;">
+
+<div class="sidebar" >
+    <div class="logo-details">
+      <div class="logo_name"><img src="../static/img/systemlogo1.png" height="80px" style=" margin-top: 50px;"></div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <br>
+    <ul class="nav-list">
+      <li>
+        <a href="{{ url_for('daniw_dashboard') }}">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name" >Dashboard</span>
+        </a>
+         <span class="tooltip" >Dashboard</span>
+      </li>
+      <li>
+       <a href="{{ url_for('daniw') }}">
+         <i class='bx bx-book' ></i>
+         <span class="links_name">Manage Violators</span>
+       </a>
+       <span class="tooltip">Manage Violators</span>
+     </li>
+      <li>
+       <a href="{{ url_for('daniw_service') }}">
+         <i class='bx bx-user' ></i>
+         <span class="links_name">Community Service</span>
+       </a>
+       <span class="tooltip">Community Service</span>
+     </li>
+     <li>
+       <a href="{{ url_for('daniw') }}">
+         <i class='bx bx-chart' ></i>
+         <span class="links_name">Reports</span>
+       </a>
+       <span class="tooltip">Reports</span>
+     </li>
+     <li>
+       <a href="{{ url_for('daniw_logs') }}">
+         <i class='bx bx-folder' ></i>
+         <span class="links_name">Logs</span>
+       </a>
+       <span class="tooltip">Logs</span>
+     </li>
+     <li>
+       <a href="{{ url_for('daniw_archive') }}">
+         <i class='bx bx-archive' ></i>
+         <span class="links_name">Archive</span>
+       </a>
+       <span class="tooltip">Archive</span>
+     </li>
+     <li>
+       <a href="{{ url_for('daniw_guidelines') }}">
+         <i class='bx bx-help-circle' ></i>
+         <span class="links_name">Guidelines</span>
+       </a>
+       <span class="tooltip">Guidelines</span>
+     </li>
+     <li>
+       <a href="{{ url_for('login') }}">
+         <i class='bx bx-exit' ></i>
+         <span class="links_name">Logout</span>
+       </a>
+       <span class="tooltip">Logout</span>
+     </li>
+     
+    </ul>
+  </div>
+  <section class="home-section">
+<p style="background: #11101D; font-size: 20px; color: white;"> <label style="margin-left: 20px;">Add Violators </label><label style="float: right; margin-right: 20px;"></label> 
+      </p></br><br><br>
+<div class="main">
+  <br>
+  <div class="add-form" style="margin-top: -70px; margin-left: 20px; margin-right: 300px;">
+    <form class="px-4 py-3" method="POST">
+      {% for message in get_flashed_messages() %}
+            <div class="alert alert-danger"><center>{{ message }}</center></div>
+      {% endfor %}
+    <div class="form-group row">
+    <label for="Name" class="col-sm-4 col-form-label">Last Name</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="last_name" placeholder="Enter Last Name" maxlength="15" required style="text-transform: capitalize;">
+    </div>
+    </div>
+
+    <div class="form-group row">
+    <label for="Name" class="col-sm-4 col-form-label">First Name</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="first_name" placeholder="Enter First Name" maxlength="15" required style="text-transform: capitalize;">
+    </div>
+    </div>
+
+    <div class="form-group row">
+    <label for="Name" class="col-sm-4 col-form-label">Middle Name</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="middle_name" placeholder="Enter Middle Name" maxlength="15" required style="text-transform: capitalize;">
+    </div>
+    </div>
+
+     <div class="form-group row">
+    <label for="Name" class="col-sm-4 col-form-label">House Number</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="house_number" placeholder="Enter House Number" maxlength="15" required style="text-transform: capitalize;">
+    </div>
+    </div>
+
+    <div class="form-group row">
+    <label for="Name" class="col-sm-4 col-form-label">Street</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="street" placeholder="Enter Street" maxlength="15" required style="text-transform: capitalize;">
+    </div>
+    </div>
+
+
+     <div class="form-group row">
+    <label for="Name" class="col-sm-4 col-form-label">Contact</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="contact" maxLength="11"  onkeypress="return onlyNumberKey(event)" placeholder="Enter Contact" required>
+    </div>
+    </div>
+
+    
+
+    
+     <div class="form-group row">
+    <label for="Name" class="col-sm-4 col-form-label">Violation</label>
+    <div class="col-sm-8">
+     <select name="violation" id="violation" class="form-control">
+      <option>Select Violation</option>
+        {%for violations in violations%}
+        <option value="{{violations['violation']}}">{{violations['violation']}}</option>
+        {%endfor%}
+      </select>
+    </div>
+    </div>
+
+<script>
+        $(document).ready(function(){
+            $(".mul-select").select2({
+                    placeholder: "Select Violation", //placeholder
+                    tags: true,
+                    tokenSeparators: ['/',',',';'," "] 
+                });
+            })
+    </script>
+
+     <div class="form-group row">
+    <label for="Name" class="col-sm-4 col-form-label">Penalty</label>
+    <div class="col-sm-8">
+      <select name="penalty" id="penalty" class="form-control">
+        <option>Select Penalty Type</option>
+        {%for stat in stat%}
+        <option value="{{stat['penalty']}}">{{stat['penalty']}}</option>
+        {%endfor%}
+      </select>
+    </div>
+    </div>
+
+     
+    
+    <!-- BUTTON -->
+    <br>
+    <button style="margin-top: -30px;" type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i>Submit</button>
+    <a href="{{url_for('daniw')}}" style="margin-top: -30px;" class="btn btn-primary btn-danger"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</a>
+    </form>
+    </div>
+
+
+</div>
+
+<script src="../static/js/script1.js"></script>
+<script>
+    function onlyNumberKey(evt) {
+          
+        // Only ASCII character in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
+    }
+</script>
+</body>
+</html> 

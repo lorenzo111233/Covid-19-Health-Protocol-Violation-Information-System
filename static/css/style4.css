@@ -1,0 +1,108 @@
+body{
+  margin:0px;
+  padding: 0px;
+  background-color:#1b203d;
+  overflow: hidden;
+  font-family: bernard;
+  color: #1b203d;
+}
+.clearfix{
+  clear: both;
+}
+.logo{
+  margin: 0px;
+  margin-left: 28px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 30px;
+}
+.logo span{
+  color: #f7403b;
+}
+.sidenav {
+  height: 100%;
+  width: 300px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #32be8f;
+  overflow-x: hidden;
+  padding-top: 20px;
+  font-weight: bold;
+  border-right: 4px solid #21B6A8; 
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  display: block;
+  
+
+}
+
+.sidenav a:hover {
+  color: #FFFFFF;
+  text-decoration: none;
+  background-color: #38d39f;
+}
+
+.main {
+  margin-top: 50px;
+  margin-left: 315px; /* Same as the width of the sidenav */
+  margin-right: 30px;
+  padding: 0px 10px;
+  
+}
+.brgysf{
+  text-align: center;
+margin-top: -30px;
+margin-right: 20px;
+}
+.btn{
+  float: right;
+  margin-right: 20px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+.active {
+  color: #FFFFFF;
+  background-color: #38d39f;
+  border-right: 4px solid #FFFFFF;
+}
+.unactive {
+  color: #FFFFFF;
+}
+.logo{
+  top: 0;
+  left: 0;
+}
+.add-form {
+    margin-right: 200px;
+    margin-left: 200px;
+    background: #f7f7f7;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+
+}
+.manage-table {
+  width:600px; 
+  height:100px;
+  border: 1px solid; 
+  overflow:auto;
+}
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+bottom: .5em;
+}
